@@ -1,0 +1,69 @@
+composer require laravel/ui
+
+// Generate basic scaffolding...
+php artisan ui bootstrap
+php artisan ui vue
+php artisan ui react
+
+
+// Generate login / registration scaffolding...
+php artisan ui bootstrap --auth
+php artisan ui vue --auth
+php artisan ui react --auth
+
+
+npm install
+
+npm run dev
+
+===========================================================================
+
+//resource controller
+php artisan make:controller PhotoController --resource
+Route::resource('/post', PostController::class);
+
+
+============================================================================
+
+//create slug
+composer require cviebrock/eloquent-sluggable
+
+//use in model
+use Cviebrock\EloquentSluggable\Sluggable;
+use Sluggable;
+public function Sluggable(): array {
+    return [
+        'slug' => [
+            'source' => 'title'
+        ]
+    ];
+}
+
+//in controller
+use Cviebrock\EloquentSluggable\Services\SlugService;
+SlugService::createSlug(Post::class, 'slug', $request->title),
+
+
+============================================================================
+
+//named routes
+{{ route('library.show', ['id' => $library_row->id]) }}
+
+//get logged user id
+auth()->id();
+
+//auth
+Auth::user()->id
+
+============================================================================
+
+//image upload
+// $request->image->move(public_path('images'), $newImageName);
+$request->file('image')->storeAs('public/photos', $newImageName);
+
+
+============================================================================
+
+public function __construct(){
+    $this->middleware('auth', ['except' => []]);
+}
